@@ -248,8 +248,14 @@ module.exports = {
                 },
               },
               {
-                loader: require.resolve('less-loader'),
-              }
+                loader:require.resolve('less-loader'),
+                options: {
+                  modules: false,
+                  modifyVars: {
+                      "@primary-color": "#f9c700"
+                  }
+                }
+              },
             ],
           },
           // "file" loader makes sure assets end up in the `build` folder.
