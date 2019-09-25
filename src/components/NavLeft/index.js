@@ -1,13 +1,14 @@
 import React from 'react';
 import MenuConfig from '../../config/menuConfig';
 
-import { Menu, Icon,Divider  } from 'antd';
+import { Menu, Icon, Divider } from 'antd';
+import { NavLink } from 'react-router-dom';
 const { SubMenu } = Menu;
 
 import './index.less'
 
 export default class NavLeft extends React.Component {
-    componentWillMount(){
+    componentWillMount() {
         const menuTreeNode = this.renderMenu(MenuConfig);
         this.setState({
             menuTreeNode
@@ -15,16 +16,18 @@ export default class NavLeft extends React.Component {
     }
 
     //菜单渲染
-    renderMenu=(data)=>{
-        return data.map((item)=>{
-            if(item.children){
-               return (
-                   <SubMenu title={item.title} key={item.key}>
+    renderMenu = (data) => {
+        return data.map((item) => {
+            if (item.children) {
+                return (
+                    <SubMenu title={item.title} key={item.key}>
                         {this.renderMenu(item.children)}
-                   </SubMenu>
-                   )
+                    </SubMenu>
+                )
             }
-            return <Menu.Item title={item.title} key={item.key}>{item.title}</Menu.Item>
+            return <Menu.Item title={item.title} key={item.key}>
+                        <NavLink to={item.key}>{item.title}</NavLink>
+                   </Menu.Item>
         })
     }
     render() {
